@@ -4,17 +4,17 @@ import java.util.*;
 
 public class OrderBookEngine {
 
-	private Map<Double, Integer> bidOffers = new TreeMap<>(
+	private Map<Double, Integer> bidOffers = new TreeMap(
 			new Comparator<Double>() {
-				@Override
+
 				public int compare(Double lhs, Double rhs) {
 					return rhs.compareTo(lhs);
 				}
 			});
 
-	private Map<Double, Integer> askOffers = new TreeMap<>();
+	private Map<Double, Integer> askOffers = new TreeMap<Double, Integer>();
 
-	private List<Pair<Double, Integer>> executedOrders = new ArrayList<>();
+	private List<Pair<Double, Integer>> executedOrders = new ArrayList<Pair<Double, Integer>>();
 
 	public int getExecutedOrdersCount() {
 		return executedOrders.size();
@@ -32,7 +32,7 @@ public class OrderBookEngine {
 	public void printOrderBook() {
 		System.out.println("");
 		Set<Double> bid_prices = bidOffers.keySet();
-		List<Double> bid_prices_list = new ArrayList<>(bid_prices);
+		List<Double> bid_prices_list = new ArrayList<Double>(bid_prices);
 		System.out.println("____ bid ____ ");
 		for (Double bid_price : bid_prices_list) {
 			System.out.println(bidOffers.get(bid_price) + " @ " + bid_price);
@@ -51,7 +51,7 @@ public class OrderBookEngine {
 		if (buy) {
 			// BUY
 			Set<Double> ask_prices = askOffers.keySet();
-			List<Double> ask_prices_list = new ArrayList<>(ask_prices);
+			List<Double> ask_prices_list = new ArrayList<Double>(ask_prices);
 			for (double ask_price : ask_prices_list) {
 				if (quantity > 0 && price >= ask_price) {
 					int ask_quantity = askOffers.get(ask_price);
@@ -77,7 +77,7 @@ public class OrderBookEngine {
 
 		} else {
 			Set<Double> bid_prices = bidOffers.keySet();
-			List<Double> bid_prices_list = new ArrayList<>(bid_prices);
+			List<Double> bid_prices_list = new ArrayList<Double>(bid_prices);
 			for (double bid_price : bid_prices_list) {
 				if (quantity > 0 && price <= bid_price) {
 					int bid_quantity = bidOffers.get(bid_price);
